@@ -6,6 +6,7 @@ from .story.multihop import MultiHopTask
 from .story.filtering import FilteringTask
 from .story.retrieval import RetrievalTask
 from .math.math_task import MathTask
+from .livecodebench.livecodebench_task import LiveCodeBenchTask
 
 
 TASK_REGISTRY = {
@@ -21,4 +22,5 @@ TASK_REGISTRY = {
     "math_aime24": MathTask,
     "math_aime25": MathTask,
     "math_500": MathTask,
+    "livecodebench": LiveCodeBenchTask,
 }

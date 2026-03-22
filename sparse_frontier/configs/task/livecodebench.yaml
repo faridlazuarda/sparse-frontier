@@ -1,0 +1,6 @@
+# @package _global_
+
+task:
+  name: livecodebench
+  args:
+    version: "release_v6"
