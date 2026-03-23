@@ -35,7 +35,7 @@ MODEL_OVERRIDES = (
 
 COMMON_ARGS = (
     f"{MODEL_OVERRIDES} "
-    "samples=1 max_input_tokens=4096 max_output_tokens=128 gpus=1 tp=1"
+    "samples=1 max_input_tokens=4096 max_output_tokens=512 gpus=1 tp=1"
 )
 
 
@@ -86,7 +86,7 @@ def test_vllm_compat():
         "configure_vllm_environment();"
         "import os;"
         "print(f'VLLM_USE_V1={os.environ.get(chr(86)+chr(76)+chr(76)+chr(77)+chr(95)+chr(85)+chr(83)+chr(69)+chr(95)+chr(86)+chr(49), None)}');"
-        'print("OK")'
+        "print('OK')"
         '"',
         cwd=WORK_DIR,
     )
@@ -98,7 +98,7 @@ def test_vllm_compat():
         'python -c "'
         "from sparse_frontier.modelling.attention.compat import flash_attn_with_kvcache;"
         "print(f'Type: {type(flash_attn_with_kvcache)}');"
-        'print("OK — lazy wrapper loaded, will resolve on first CUDA call")'
+        "print('OK — lazy wrapper loaded, will resolve on first CUDA call')"
         '"',
         cwd=WORK_DIR,
     )
@@ -129,7 +129,7 @@ def test_vllm_compat():
     ok = run(
         f"python -m sparse_frontier.main mode=all task=ruler_niah "
         f"attention=snapkv attention.args.kernel_size=5 "
-        f"attention.args.observation_window=16 attention.args.max_capacity=2048 "
+        f"attention.args.approximation_window=16 attention.args.token_capacity=2048 "
         f"use_attention_patch=true {COMMON_ARGS}",
         cwd=WORK_DIR,
     )
@@ -163,7 +163,7 @@ def test_livecodebench():
         "from sparse_frontier.tasks.livecodebench.livecodebench_task import LiveCodeBenchTask;"
         "from sparse_frontier.tasks.registry import TASK_REGISTRY;"
         "assert 'livecodebench' in TASK_REGISTRY;"
-        'print("OK")'
+        "print('OK')"
         '"',
         cwd=WORK_DIR,
     )
