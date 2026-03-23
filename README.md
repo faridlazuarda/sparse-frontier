@@ -46,6 +46,8 @@ pip install --no-cache-dir -e .
 MAX_JOBS=8 python compile.py build_ext --inplace --build-lib ./sparse_frontier/modelling/attention/minference
 ````
 
+**Note on vLLM versions:** The framework supports vLLM 0.11.0 through 0.18.0. When using vLLM >= 0.17, the bundled `flash_attn_with_kvcache` kernel is no longer available — install the standalone [flash-attn](https://github.com/Dao-AILab/flash-attention) package (`pip install flash-attn --no-build-isolation`) for decode-phase sparse attention (Quest, TOVA, dense decode).
+
 For reference, the complete list of dependencies used in our experiments is available in `./assets/pipfreeze.txt`. We tested the codebase on both A100 and H100 GPUs.
 
 1. **Configure Paths:**

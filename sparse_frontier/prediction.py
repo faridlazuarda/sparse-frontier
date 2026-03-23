@@ -3,12 +3,12 @@ import os
 import secrets
 import torch.multiprocessing as mp
 from typing import Any, Optional
-from time import sleep, time
+from time import sleep
 
 import psutil
 from tqdm import tqdm
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from vllm.utils import get_open_port
+from sparse_frontier.modelling.attention.compat import get_open_port
 
 from sparse_frontier.utils.data import load_data_without_predictions
 from sparse_frontier.utils.general import save_config
@@ -158,10 +158,8 @@ def predict_task(cfg) -> None:
         os.environ["SF_USE_ATTENTION_PATCH"] = "0"
 
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
-    os.environ["VLLM_USE_V1"] = "1"
-    os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "1"
-    os.environ["VLLM_FLASH_ATTN_VERSION"] = "2"
-    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    from sparse_frontier.modelling.attention.compat import configure_vllm_environment
+    configure_vllm_environment()
 
     pred_path = cfg.runtime.pred_path
     data = load_data_without_predictions(cfg)

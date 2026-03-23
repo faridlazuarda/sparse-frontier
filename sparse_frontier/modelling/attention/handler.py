@@ -3,7 +3,7 @@ from typing import Optional
 
 import torch
 from .abstract_attention import AttentionUtils
-from vllm.distributed import (
+from sparse_frontier.modelling.attention.compat import (
     get_tensor_model_parallel_rank,
     get_tensor_model_parallel_world_size,
     tensor_model_parallel_all_gather,

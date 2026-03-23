@@ -2,7 +2,7 @@ import torch
 from typing import Optional, Tuple, List
 from .abstract_attention import AbstractAttention
 from .abstract_attention import AttentionUtils
-from vllm.vllm_flash_attn.flash_attn_interface import flash_attn_with_kvcache
+from sparse_frontier.modelling.attention.compat import flash_attn_with_kvcache
 
 
 def _update_last_page(

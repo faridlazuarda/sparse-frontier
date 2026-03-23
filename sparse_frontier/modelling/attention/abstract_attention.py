@@ -1,7 +1,7 @@
 import torch
 
 from abc import ABC
-from vllm.vllm_flash_attn.flash_attn_interface import flash_attn_with_kvcache, flash_attn_varlen_func
+from sparse_frontier.modelling.attention.compat import flash_attn_with_kvcache, flash_attn_varlen_func
 
 class AttentionUtils:
     @staticmethod

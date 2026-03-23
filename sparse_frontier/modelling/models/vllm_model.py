@@ -55,20 +55,21 @@ class VLLMModel(AbstractModel):
             hf_overrides = {}
 
         from vllm import LLM
+        from sparse_frontier.modelling.attention.compat import get_extra_llm_kwargs
+
         model = LLM(
             model=model_path,
-            # skip_tokenizer_init=True,  # Disabled: Gemma requires tokenizer for model configuration
             enforce_eager=True,
             seed=self.seed,
             gpu_memory_utilization=0.85,
             max_num_batched_tokens=self.max_input_tokens + self.max_output_tokens,
             max_model_len=self.max_input_tokens + self.max_output_tokens,
-            enable_chunked_prefill=False, # it's no-op in v1
+            enable_chunked_prefill=False,
             enable_prefix_caching=False,
             tensor_parallel_size=self.tensor_parallel_size,
             hf_overrides=hf_overrides,
             limit_mm_per_prompt={"image": 0},
-            disable_hybrid_kv_cache_manager=True, # this fixes gemma3 which has sliding window cache and it impacts the way we handle kv cache
+            **get_extra_llm_kwargs(),
         )
 
         return model

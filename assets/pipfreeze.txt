@@ -7,7 +7,9 @@ torchvision==0.23.0
 torchaudio==2.8.0
 
 # --- Serving/inference stack ---
-vllm==0.11.0
+# Supports vllm 0.11.0 through 0.18.0.  With vllm >= 0.17 also install
+# flash-attn (pip install flash-attn --no-build-isolation) for decode kernels.
+vllm==0.18.0
 transformers==4.57.1
 tokenizers
 huggingface-hub==0.34.0

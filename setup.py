@@ -17,7 +17,8 @@ _plotting_deps = [
 _experiments_deps = [
     "transformers>=4.55.2,<5",
     "tokenizers>=0.22,<0.24",
-    "vllm==0.11.0",
+    "vllm>=0.11.0,<=0.18.0",
+    "packaging",
     "accelerate>=1.0",
     "hydra-core>=1.3,<2",
     "omegaconf>=2.3,<3",
