@@ -172,7 +172,7 @@ def test_livecodebench():
     # --- Test 2: Data preparation ---
     print("\n--- Test 2: LCB data preparation ---")
     ok = run(
-        f"python -m sparse_frontier.main mode=preparation task=livecodebench "
+        f"python -m sparse_frontier.main mode=prep task=livecodebench "
         f"{COMMON_ARGS}",
         cwd=WORK_DIR,
     )
